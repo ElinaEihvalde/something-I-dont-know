@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  
+  // I don't know what I'm doing
   props: ["id"],
   computed: {
     video() {
