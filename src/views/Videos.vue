@@ -1,3 +1,23 @@
 <template>
-    <h1>This is a Video page</h1>
+<videoPage></videoPage>
 </template>
+
+
+<script>
+import videoPage from '../components/videoPage.vue'
+
+
+  export default {
+    name:'App',
+    components: {
+      videoPage
+    }
+
+}
+</script>
+
+<style>
+
+
+</style>
+ 

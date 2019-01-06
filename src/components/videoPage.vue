@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-flex>
-      <v-tabs fixed-tabs v-model="active_tab">
-        <v-tab v-for="tab in tabs" :key="tab.id"  >{{ tab.title }}</v-tab>
+      <v-tabs fixed-tabs>
+        <v-tab v-for="tab in tabs" :key="tab.id" >{{ tab.title }}</v-tab>
         <v-tab-item>
           <v-layout row>
             <largeCards></largeCards>
           </v-layout>
         </v-tab-item>
-        <v-tab-item >
+        <v-tab-item>
           <v-layout row>
             <largeCards></largeCards>
           </v-layout>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import largeCards from "../components/largeCards.vue"
+import largeCards from "./largeCards.vue";
 
 export default {
   components: {
@@ -27,11 +27,10 @@ export default {
   },
   data() {
     return {
-         active_tab: 1,
       tabs: [{ title: "All",id:'1' }, { title: "Saved", id:'2' }]
-    }
+    };
   }
-}
+};
 </script>
 
 <style>
