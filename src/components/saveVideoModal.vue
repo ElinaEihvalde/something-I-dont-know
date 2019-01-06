@@ -1,6 +1,6 @@
 <template>
   <v-dialog persistent v-model="saveDialog">
-    <v-btn icon flat color="info" slot="activator">
+    <v-btn icon flat color="white" slot="activator">
       <v-icon v-if="!videoIsSaved">bookmark_border</v-icon>
       <v-icon v-else>bookmark</v-icon>
     </v-btn>
@@ -18,7 +18,7 @@
           <v-flex xs12>
             <v-card-actions>
               <v-btn flat @click="saveDialog = false">Cancel</v-btn>
-              <v-btn class="info" @click="onSave">OK</v-btn>
+              <v-btn type="sumbit" class="info" @click="onSave" >OK</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>

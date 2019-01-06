@@ -83,7 +83,7 @@ export default new Vuex.Store({
       if (!user.fbKeys){
         return
       }
-      const fbKey = payload
+      const fbKey = user.fbKeys[payload]
       firebase.database().ref('/users/' + user.id + '/savedVideos/').child(fbKey)
       .remove()
       .then (() =>{
@@ -278,9 +278,7 @@ export default new Vuex.Store({
           }
         )
     },
-    autoSignIn({
-      commit
-    }, payload) {
+    autoSignIn({commit}, payload) {
       commit('setUser', {
         id: payload.uid,
         displayName: payload.displayName,
@@ -289,10 +287,35 @@ export default new Vuex.Store({
       })
     },
 
+    fetchUserData({commit, getters}){
+      firebase.database().ref('/users/' + getters.user.id + '/savedVideos/').once('value')
+      .then(data => {
+        const dataPairs = data.val()
+        let savedVideos = []
+        let swappedPairs = {}
+        for (let key in dataPairs) {
+          savedVideos.push(dataPairs[key])
+          swappedPairs[dataPairs[key]] = key
+        }
+        const updateUser = {
+          id: getters.user.id,
+          savedVideos: savedVideos,
+          fbKey: swappedPairs
+        }
+        console.log(savedVideos)
+      console.log(swappedPairs)
+        commit('setUser', updateUser)
+      })
+      
+      .catch(
+        error => {
+          console.log(error)
+        }
+      )
+    },
+
     //log out--------------
-    logout({
-      commit
-    }) {
+    logout({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
     }
