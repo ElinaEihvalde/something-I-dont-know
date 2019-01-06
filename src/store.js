@@ -29,12 +29,12 @@ export default new Vuex.Store({
         return
       }
       state.user.savedVideos.push(id)
-      state.user.fbKeys[id] = payload.fbKey
+      state.user.fbKey[id] = payload.fbKey
     },
     userRemovedVideos (state, payload) {
       const savedVideos = state.user.savedVideos
-      savedVideos.splice(savedVideos.findIndex(video => video.id === payload), 1)
-      Reflect.deleteProperty(state.user.fbKeys, payload)
+      savedVideos.splice(savedVideos.indexOf(payload), 1)
+      Reflect.deleteProperty(state.user.savedVideos, payload)
     },
 
     //--------------------USER------------------------------
@@ -71,7 +71,7 @@ export default new Vuex.Store({
       firebase.database().ref('/users/' + user.id).child('/savedVideos/')
       .push(payload)
       .then ((data) =>{
-        commit('userSavedVideos',{ id:payload, fbkey: data.key})
+        commit('userSavedVideos',{ id:payload, fbKey: data.key})
       })
       .catch((error) => {
         console.log(error)
@@ -80,10 +80,10 @@ export default new Vuex.Store({
 
     userRemovedVideos({commit, getters}, payload) {
       const user =  getters.user
-      if (!user.fbKeys){
+      if (!user.fbKey){
         return
       }
-      const fbKey = user.fbKeys[payload]
+      const fbKey = user.fbKey[payload]
       firebase.database().ref('/users/' + user.id + '/savedVideos/').child(fbKey)
       .remove()
       .then (() =>{
