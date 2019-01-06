@@ -109,4 +109,31 @@ export default {
 .horizontal::-webkit-scrollbar {
   display: none;
 }
+
+@media (min-width: 1281px) {
+  
+      .horizontal {
+      margin-top: 2vw;
+      min-width: 100%; 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      height: 500px;
+      grid-row-gap: 20px;
+      grid-column-gap: 20px;
+      }
+      .radius {margin: 0; height: 240px;}
+      .radius:nth-of-type(1){
+      height: 500px;
+      grid-column: 1 / 3;
+      grid-row: 1/3;
+      }
+      .radius:nth-of-type(2) {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;  
+        }
+      .radius:nth-of-type(3) {
+        grid-column: 3/4;
+        grid-row: 2/3;
+        }
+}
 </style>

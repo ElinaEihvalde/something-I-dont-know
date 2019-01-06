@@ -53,9 +53,6 @@ export default {
 width: 100%;
   height: 400px;
   background-color: #32889e;
-
-  
-
   margin: 2vw 2vw 2vw 0;
   cursor: pointer;
 }
@@ -74,5 +71,28 @@ i {
   z-index: 1;
   right: 2vh;
   top: 2vh;
+}
+
+@media (min-width: 1281px) {
+
+.vertical {
+  height: auto;
+  min-width: 100%;
+  display: grid;
+  overflow-x: auto;
+  overflow-y: hidden;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-column-gap: 20px;
+
+}
+.radius {
+  width: 100%;
+  height: 400px;
+  background-color: #32889e;
+  margin: 2vw 2vw 0 0;
+  cursor: pointer;
+  display: inline;
+}
+
 }
 </style>

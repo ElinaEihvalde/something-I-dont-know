@@ -109,6 +109,20 @@ export default {
   width: 100%;
 }
 
+@media (min-width: 1281px) {
+.horizontal {overflow-x: visible;}
+.radius {
+  border-radius: 7px;
+  min-width: 7vw;
+  max-width: 7vw;
+  margin: 2vw 0.5vw 2vw 0;
+}
 
+.radius:nth-of-type(6){display: none;}
+.radius:nth-of-type(7){display: none;}
+.headline {font-size: 1.5em !important;}
+.title {font-size: 1.3em !important;}
+
+}
 
 </style>

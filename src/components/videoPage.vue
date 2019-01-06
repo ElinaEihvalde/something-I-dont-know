@@ -1,21 +1,21 @@
 <template>
-  <v-container>
-    <v-flex>
-      <v-tabs fixed-tabs>
+  <div>
+    
+      <v-tabs fixed-tabs >
         <v-tab v-for="tab in tabs" :key="tab.id" >{{ tab.title }}</v-tab>
-        <v-tab-item>
-          <v-layout row>
+        <v-tab-item >
+          <v-layout row class="tab-container">
             <largeCards></largeCards>
           </v-layout>
-        </v-tab-item>
+        </v-tab-item >
         <v-tab-item>
-          <v-layout row>
+          <v-layout row  class="tab-container">
             <largeCards></largeCards>
           </v-layout>
         </v-tab-item>
       </v-tabs>
-    </v-flex>
-  </v-container>
+  
+  </div>
 </template>
 
 <script>
@@ -69,7 +69,7 @@ export default {
 .v-tabs__div {
   font-size: 12px;
 }
-.container {
-  padding-top: 0;
-}
+
+.tab-container{width: 90%; margin:auto;}
 </style>
+
