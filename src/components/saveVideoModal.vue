@@ -30,7 +30,7 @@
 
 <script>
 export default {
-props: ['id'],
+props: ['videoId'],
 
   data: () => ({
     saveDialog: false
@@ -39,9 +39,7 @@ props: ['id'],
 
   computed: {
     videoIsSaved() {
-      return this.$store.getters.user.savedVideos.findIndex(videoId => {
-        return videoId === this.videoId
-      })
+    return this.$store.getters.user.savedVideos.indexOf(this.videoId) > -1
     }
   },
 

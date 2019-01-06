@@ -83,7 +83,7 @@ export default new Vuex.Store({
       if (!user.fbKeys){
         return
       }
-      const fbKey = user.fbKeys[payload]
+      const fbKey = payload
       firebase.database().ref('/users/' + user.id + '/savedVideos/').child(fbKey)
       .remove()
       .then (() =>{

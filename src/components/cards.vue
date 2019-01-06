@@ -2,7 +2,7 @@
   <v-layout class="horizontal">
     <v-card class="radius" v-for="video in videos" :key="video.id">
       <v-card-actions class="top-icon" >
-      <saveVideoModal :videoId="video.id"></saveVideoModal>
+      <saveVideoModal v-bind:videoId="video.id"></saveVideoModal>
       </v-card-actions>
       <v-img @click="onLoadVideo(video.id)" :src="video.thumbnail" height="100%">
         <v-container class="scrim" fill-height fluid>
