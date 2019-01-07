@@ -3,7 +3,7 @@
     <div class="container" v-for="container in containers" :key="container.id">
       <h3 class="headline">{{container.hed}}</h3>
       <p class="subheading">{{container.sub}}</p>
-      <cards></cards>
+      <cards v-bind:videoList="videos(container.type)"></cards>
       <a :href="container.link">
         <v-btn flat right small href>see all</v-btn>
       </a>
@@ -19,7 +19,22 @@ export default {
   components: {
     cards
   },
-
+  methods: {
+    videos (type) {
+      if(type === 'saved') {
+        let savedVideos = []
+        this.$store.getters.loadedVideos.forEach(video => {
+          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
+            savedVideos.push(video)
+          }
+        });
+        return savedVideos
+      }
+      if(type === 'all') {
+        return this.$store.getters.loadedVideos;
+      }
+    }
+  },
   data() {
     return {
       containers: [
@@ -27,14 +42,15 @@ export default {
           id: 1,
           hed: "Learn the latest moves",
           sub: "latest videos",
-          link:
-            "https://www.youtube.com/watch?v=at6QjSwKOuA&index=6&list=PL55RiY5tL51qxUbODJG9cgrsVd7ZHbPrt"
+          type: 'all',
+          link: "https://www.youtube.com/watch?v=at6QjSwKOuA&index=6&list=PL55RiY5tL51qxUbODJG9cgrsVd7ZHbPrt"
         },
 
         {
           id: 2,
           hed: "Get back to training",
           sub: "saved videos",
+          type: 'saved',
           link: "#"
         }
       ]

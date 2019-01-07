@@ -27,19 +27,12 @@ export default {
       bookmarkFull: "bookmark"
     };
   },
-  props:['videoId'],
-
-  computed: {
-    videos () {
-      return this.$store.getters.loadedVideos
-    },
-    video() {
-      return this.$store.getters.loadedVideo(this.id);
-    }
-
-    
-  },
-
+  props:['videoId', 'videoList'],
+computed: {
+  videos() {
+    return this.videoList
+  }
+},
   methods: {
     onLoadVideo(id) {
       this.$router.push("/videos/" + id);
