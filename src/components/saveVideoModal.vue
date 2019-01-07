@@ -47,9 +47,12 @@ props: ['videoId'],
     onSave() {
       if (this.videoIsSaved) {
         this.$store.dispatch("userRemovedVideos", this.videoId)
+        this.saveDialog = false
       } else {
         this.$store.dispatch("userSavedVideos", this.videoId)
+        this.saveDialog = false
       }
+      
     }
   }
 }

@@ -349,7 +349,7 @@ export default new Vuex.Store({
 
     // part of all videos for dashboard
     dashboardVideos(state, getters) {
-      return getters.loadedVideos.slice(0, 3)
+      return getters.loadedVideos.slice(0, 5)
     },
 
     // single vidoe

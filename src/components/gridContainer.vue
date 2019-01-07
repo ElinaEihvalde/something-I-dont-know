@@ -19,23 +19,8 @@ export default {
   components: {
     cards
   },
-  methods: {
-    videos (type) {
-      if(type === 'saved') {
-        let savedVideos = []
-        this.$store.getters.loadedVideos.forEach(video => {
-          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
-            savedVideos.push(video)
-          }
-        });
-        return savedVideos
-      }
-      if(type === 'all') {
-        return this.$store.getters.loadedVideos;
-      }
-    }
-  },
-  data() {
+
+    data() {
     return {
       containers: [
         {
@@ -55,7 +40,25 @@ export default {
         }
       ]
     };
+  },
+
+  methods: {
+    videos (type) {
+      if(type === 'saved') {
+        let savedVideos = []
+        this.$store.getters.loadedVideos.forEach(video => {
+          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
+            savedVideos.push(video)
+          }
+        })
+        return savedVideos
+      }
+      if(type === 'all') {
+        return this.$store.getters.dashboardVideos
+      }
+    }
   }
+
 };
 </script>
 

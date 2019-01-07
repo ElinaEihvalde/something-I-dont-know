@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="horizontal">
+  <div class="vertical">
     <v-card class="radius" v-for="video in videos" :key="video.id">
       <v-card-actions class="top-icon" >
       <saveVideoModal v-bind:videoId="video.id"></saveVideoModal>
@@ -16,36 +16,41 @@
         </v-container>
       </v-img>
     </v-card>
-  </v-layout>
+  </div>
 </template>
 
 <script>
 export default {
   
-  props:['videoId', 'videoList'],
-computed: {
-  videos() {
-    return this.videoList
-  }
-},
+
+  computed: {
+    videos() {
+     let savedVideos = []
+        this.$store.getters.loadedVideos.forEach(video => {
+          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
+            savedVideos.push(video)
+          }
+        })
+        return savedVideos
+    }
+  },
+
   methods: {
     onLoadVideo(id) {
       this.$router.push("/videos/" + id);
     }
   }
-}
+};
 </script>
 
-
-
-<style>
-.v-image__image,
-.v-image__image--cover {
-  border-radius: 7px;
+<style  scoped>
+.title {
+  color: #fff;
+  position: absolute;
+  bottom: 2vw;
+  z-index: 2;
 }
-</style>
 
-<style scoped>
 .top-icon {
   position: absolute;
   z-index: 100000;
@@ -81,50 +86,50 @@ computed: {
   bottom: 0;
 }
 
-
-
 .radius {
-  border-radius: 7px;
-  min-width: 200px;
-  height: 250px;
+width: 100%;
+  height: 400px;
   background-color: #32889e;
-  margin: 2vw 3vw 2vw 0;
+  margin: 2vw 2vw 2vw 0;
   cursor: pointer;
 }
-.horizontal {
-  min-width: 100%;
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
+.vertical {
+  width: 100%;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.horizontal::-webkit-scrollbar {
+.vertical::-webkit-scrollbar {
   display: none;
 }
 
+i {
+  position: absolute;
+  z-index: 1;
+  right: 2vh;
+  top: 2vh;
+}
+
 @media (min-width: 1281px) {
-  
-      .horizontal {
-      margin-top: 2vw;
-      min-width: 100%; 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      height: 500px;
-      grid-row-gap: 20px;
-      grid-column-gap: 20px;
-      }
-      .radius {margin: 0; height: 240px;}
-      .radius:nth-of-type(1){
-      height: 500px;
-      grid-column: 1 / 3;
-      grid-row: 1/3;
-      }
-      .radius:nth-of-type(2) {
-        grid-column: 3 / 4;
-        grid-row: 1 / 2;  
-        }
-      .radius:nth-of-type(3) {
-        grid-column: 3/4;
-        grid-row: 2/3;
-        }
+
+.vertical {
+  height: auto;
+  min-width: 100%;
+  display: grid;
+  overflow-x: auto;
+  overflow-y: hidden;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-column-gap: 20px;
+
+}
+.radius {
+  width: 100%;
+  height: 400px;
+  background-color: #32889e;
+  margin: 2vw 2vw 0 0;
+  cursor: pointer;
+  display: inline;
+}
+
 }
 </style>

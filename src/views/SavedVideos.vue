@@ -10,7 +10,7 @@
         </v-tab-item>
         <v-tab-item >
           <v-layout row>
-            <largeCards></largeCards>
+            <savedLargeCards></savedLargeCards>
           </v-layout>
         </v-tab-item>
       </v-tabs>
@@ -20,10 +20,12 @@
 
 <script>
 import largeCards from "../components/largeCards.vue"
+import savedLargeCards from "../components/savedLargeCards.vue";
 
 export default {
   components: {
-    largeCards
+    largeCards,
+      savedLargeCards
   },
   data() {
     return {
