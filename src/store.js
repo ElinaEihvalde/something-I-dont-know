@@ -233,10 +233,11 @@ export default new Vuex.Store({
     signUp({
       commit
     }, payload) {
+      let newUser = 
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(
           user => {
-            const newUser = {
+            newUser = {
               id: user.user.uid,
               displayName: payload.displayName,
               savedVideos: [],
@@ -244,13 +245,16 @@ export default new Vuex.Store({
 
             }
             commit('setUser', newUser)
+            firebase.database().ref('/users/' + newUser.id + '/userName/').push(newUser.displayName)
           }
+          
         )
         .catch(
           error => {
             console.log(error)
           }
         )
+       
     },
 
 
@@ -313,6 +317,24 @@ export default new Vuex.Store({
         }
       )
     },
+
+    getUserName({commit, getters}){
+      firebase.database().ref('/users/' + getters.user.id + '/userName/').once('value')
+      .then(data => {
+        const dataPairs = data.val()
+        let displayName = []
+        for (let key in dataPairs) {
+          displayName.push(dataPairs[key])
+        }
+        const updateUser = {
+          id: getters.user.id,
+          displayName: displayName,
+        }
+        console.log(displayName)
+        commit('setUser', updateUser)
+      })
+    },
+
 
     //log out--------------
     logout({commit}) {
