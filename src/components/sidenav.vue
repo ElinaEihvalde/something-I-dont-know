@@ -6,6 +6,7 @@
       <v-list class="top">
         <img src="https://i.imgur.com/0bWwcEd.jpg">
       </v-list>
+      <span>User Name: {{getUserName}}</span>
       <!-- Middle part of navigation -->
       <v-list class="mid">
         <v-list-tile 
@@ -111,6 +112,9 @@ export default {
           },
           userIsNotAuthenticated () {
             return this.$store.getters.user == null && this.$store.getters.user == undefined
+          },
+           getUserName() {
+            return this.$store.getters.user.displayName ? this.$store.getters.user.displayName : 'no name'
           }
   },
   //temporary

@@ -261,7 +261,7 @@ export default new Vuex.Store({
     //sign in ----------
 
     signUserIn({
-      commit
+      commit, dispatch
     }, payload) {
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then(
@@ -274,6 +274,7 @@ export default new Vuex.Store({
 
             }
             commit('setUser', newUser)
+            dispatch('getUserName')
           }
         )
         .catch(
@@ -282,13 +283,14 @@ export default new Vuex.Store({
           }
         )
     },
-    autoSignIn({commit}, payload) {
+    autoSignIn({commit, dispatch}, payload) {
       commit('setUser', {
         id: payload.uid,
         displayName: payload.displayName,
               savedVideos: [],
               fbKeys:{}
       })
+       dispatch('getUserName')
     },
 
     fetchUserData({commit, getters}){
@@ -301,11 +303,8 @@ export default new Vuex.Store({
           savedVideos.push(dataPairs[key])
           swappedPairs[dataPairs[key]] = key
         }
-        const updateUser = {
-          id: getters.user.id,
-          savedVideos: savedVideos,
-          fbKey: swappedPairs
-        }
+        const updateUser = getters.user
+          updateUser.savedVideos = savedVideos
         console.log(savedVideos)
       console.log(swappedPairs)
         commit('setUser', updateUser)
@@ -322,15 +321,10 @@ export default new Vuex.Store({
       firebase.database().ref('/users/' + getters.user.id + '/userName/').once('value')
       .then(data => {
         const dataPairs = data.val()
-        let displayName = []
-        for (let key in dataPairs) {
-          displayName.push(dataPairs[key])
-        }
-        const updateUser = {
-          id: getters.user.id,
-          displayName: displayName,
-        }
-        console.log(displayName)
+        let displayName = dataPairs[Object.keys(dataPairs)[0]];
+        const updateUser = getters.user
+        updateUser.displayName = displayName
+        console.log(updateUser.displayName)
         commit('setUser', updateUser)
       })
     },
