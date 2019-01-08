@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container" v-for="container in containers" :key="container.id">
-      <h3 class="headline">{{container.hed}}</h3>
+      <h5 class="headline">{{container.hed}}</h5>
       <p class="subheading">{{container.sub}}</p>
       <cards v-bind:videoList="videos(container.type)"></cards>
       <a :href="container.link">

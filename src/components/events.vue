@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <h5 class="headline">Upcoming events</h5>
-    <v-list v-for="event in events" :key="event.id">
+    <v-list v-for="event in events" :key="event.id" style="background-color:#f7f7f7;">
       <v-list-tile avatar>
         <v-list-tile-avatar color="primary" size="15"></v-list-tile-avatar>
 
@@ -42,4 +42,6 @@ export default {
 .headline {
   margin: 2vh 0;
 }
+
+.container {padding: 0 24px 0 24px;}
 </style>

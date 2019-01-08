@@ -2,19 +2,23 @@
   <div class="page-container">
     <v-layout>
       <div class="vid-container">
+        <v-btn icon flat class="btn" color="#fff">
+          <v-icon>arrow_back</v-icon>
+           </v-btn>
         <video
           class="video"
           width="100%"
           preload="metadata"
           controls
           controlslist="nodownload"
-          
+          autoplay
           :src="video.videoUrl"
           id="video"
-        ></video>
+        >
+        </video>
       </div>
     </v-layout>
-       <div id="video-controls">
+       <div id="video-controls" style="display:none">
           <v-btn type="button" id="play-pause">Play</v-btn>
           <input type="range" id="seek-bar" value="0">
           <button type="button" id="mute">Mute</button>
@@ -51,6 +55,7 @@ export default {
   position: absolute;
 
 } */
+.btn {position: absolute; z-index: 1000;}
 .video {
   border-radius: 0 0 7px 7px;
 }
@@ -61,6 +66,7 @@ export default {
 .subheading {
   color: #3f51b5;
 }
+
 
 @media (min-width: 1281px) {
 .vid-container{

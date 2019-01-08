@@ -80,10 +80,9 @@ export default {
   color: #fff;
 }
 
+.container {padding-top: 4vw;}
 
 .horizontal {
-
-
   min-width: 100%;
   display: flex;
   overflow-x: auto;

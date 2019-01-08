@@ -6,8 +6,8 @@
       <v-list class="radius">
         <v-subheader class="headline">Can't attend the class?</v-subheader>
         <div class="center">
-          <v-btn large color="error" @click="snackbar1 = true; sheet=false">I can't come</v-btn>
-          <v-btn large color="success" @click="snackbar2 = true; sheet=false">I will be there</v-btn>
+          <v-btn flat @click="snackbar1 = true; sheet=false">I can't come</v-btn>
+          <v-btn color="info" @click="snackbar2 = true; sheet=false">I will be there</v-btn>
         </div>
       </v-list>
     </v-bottom-sheet>
@@ -77,8 +77,8 @@ font-size: 1.1em;
 }
 
 .center {
-  padding: 5vh 0;
-  text-align:center;
+  padding: 5vw 0;
+  
 }
 
 

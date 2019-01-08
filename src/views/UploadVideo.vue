@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-content class="upload">
     <v-container>
       <v-flex>
         <v-layout row>
@@ -146,6 +146,7 @@ export default {
 </script>
 
 <style  scoped>
+.upload {margin-top: 10vh;}
 
 
 </style>

@@ -1,9 +1,9 @@
 
 <template>
-  <v-container>
+  <v-container  class="event-wrapper">
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
-        <h4>Create new event</h4>
+        <h4 class="headline">Create new event</h4>
       </v-flex>
     </v-layout>
 
@@ -91,4 +91,8 @@ export default {
 </script>
 
 <style  scoped>
+
+.event-wrapper {margin-top: 10vh;}
+.centered {text-align: center;}
+h3 {margin: 2vh 0;}
 </style>
