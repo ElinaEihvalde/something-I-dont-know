@@ -55,7 +55,10 @@ export default {
 };
 </script>
 <style>
-.v-snack__wrapper {border-radius: 12px!important;}
+
+.v-snack__wrapper {border-radius: 12px!important}
+
+
 .snack {
 margin-top: 18px!important;
 width: 95%;

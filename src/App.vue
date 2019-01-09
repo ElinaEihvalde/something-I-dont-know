@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app style="background-color:#f7f7f7;">
-      <sidenav></sidenav>
+      <sidenav :class="{ 'hidden': $route.path==='/videos/:id' }"></sidenav>
       <div id="background">
         <router-view style="background-color:#f7f7f7;"></router-view>
       </div>
@@ -17,6 +17,22 @@ export default {
   name: "App",
   components: {
   },
+  data() {
+    
+   
+  }/* ,
+
+methods: {
+  hide () {
+    if ($router.path === '/videos/:id') {
+     document.getElementsByTagName('sidenav').addClass('hidden')
+    }
+    else {
+      return
+    }
+  }
+} 
+   */
 
 
 }

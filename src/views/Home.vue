@@ -6,7 +6,8 @@
 
     <v-content>
       <div class="wrapper">
-        <h4 class="display-1">Welcome {{displayName}}!</h4>
+        <h4 >Welcome {{getUserName}}!</h4>
+         
         <div class="video-grid">
           <gridContainer></gridContainer>
         </div>
@@ -22,6 +23,7 @@
 import gridContainer from '../components/gridContainer.vue'
 import scheduleCont from '../components/scheduleCont.vue'
 
+
 export default {
   name: "App",
   components: {
@@ -31,9 +33,9 @@ export default {
 
   computed: 
   {
-    displayName() {
-      return this.$store.getters.name
-    }
+    getUserName() {
+            return this.$store.getters.user.displayName
+          }
   }
 }
 </script>
@@ -55,6 +57,12 @@ export default {
   background-color: #f7f7f7;
   border-radius: 7px;
   padding: 2em 0;
+}
+
+.wrapper h4 {
+  font-size: 8vw;
+      font-weight: 400;
+      margin: 3vw 24px;
 }
 
 @media (min-width: 1281px) {

@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      color: '#00BCD4',
+      color: '',
      colors: ['#00BCD4', '#CDDC39', '#E91E63', '#9C27B0'],
      style: { margin: '0 16px 4vh 0', }
     };

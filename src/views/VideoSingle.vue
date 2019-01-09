@@ -2,33 +2,40 @@
   <div class="page-container">
     <v-layout>
       <div class="vid-container">
-        <v-btn icon flat class="btn" color="#fff">
-          <v-icon>arrow_back</v-icon>
+        <v-btn icon flat class="btn" color="white" @click="$router.go(-1)">
+          <v-icon large>arrow_back</v-icon>
            </v-btn>
         <video
           class="video"
           width="100%"
           preload="metadata"
-          controls
+         controls
           controlslist="nodownload"
           autoplay
           :src="video.videoUrl"
-          id="video"
+          id="videoElement"
+          v-play="playing"
         >
         </video>
+     
       </div>
     </v-layout>
-       <div id="video-controls" style="display:none">
-          <v-btn type="button" id="play-pause">Play</v-btn>
+       <div class="controls" style="display:none" >
+          <v-btn v-show="paused" @click="play">Play</v-btn>
+           <v-btn v-show="playing" @click="pause">Pause</v-btn>
           <input type="range" id="seek-bar" value="0">
           <button type="button" id="mute">Mute</button>
           <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
           <v-btn type="button" id="full-screen">Full-Screen</v-btn>
         </div>
     <v-layout>
+
       <div class="description">
+        <div class="inline">
         <h3 class="headline">{{video.title}}</h3>
-        <saveVideoModal :videoId="video.id"></saveVideoModal>
+         <addNote></addNote>
+        </div>
+        
         <p class="subheading">{{video.date | event}}</p>
         <p class="body-1">{{video.description}}</p>
       </div>
@@ -37,24 +44,63 @@
 </template>
 
 <script>
+import addNote from '../components/addNote.vue'
 
 export default {
-  // I don't know what I'm doing
+  components:{
+    addNote
+  },
+ 
   props: ["id"],
+   /* data() {
+     return{
+       playing: false
+       }
+  },
+ methods: {
+   play() {
+      this.playing = true;
+    },
+    pause() {
+      this.playing = false;
+    }
+ }, */
   computed: {
     video() {
       return this.$store.getters.loadedVideo(this.id);
+    },
+   /*  paused() {
+      return !this.playing;
+    } */
+  }/* ,
+
+   directives: {
+    play: {
+      bind(el, binding, vnode) {
+        el.addEventListener('playing', () => {
+          vnode.context[binding.expression] = !el.paused;
+        });
+        el.addEventListener('pause', () => {
+          vnode.context[binding.expression] = !el.paused;
+        });
+        vnode.context[binding.expression] = !el.paused;
+      },
+      update(el, binding) {
+        if (el.paused) {
+          if (binding.value) {
+            el.play();
+          }
+        } else if (!binding.value) {
+          el.pause();
+        }
+      }
     }
-  }
-};
+  }, */
+}
 </script>
 
 <style  scoped>
-
-/* #video-controls {
-  position: absolute;
-
-} */
+.inline {display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 5vw;}
 .btn {position: absolute; z-index: 1000;}
 .video {
   border-radius: 0 0 7px 7px;

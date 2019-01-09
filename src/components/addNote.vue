@@ -2,20 +2,26 @@
   <div>
     <v-bottom-sheet v-model="sheet">
       <v-icon disabled large slot="activator" color="#9FA8DA!important">playlist_add</v-icon>
+      <form @submit.prevent="onAddNote">
+        <v-list class="radius">
+          <v-subheader class="headline">Add a note</v-subheader>
+          <colorpicker v-model="color" id="color"></colorpicker>
 
-      <v-list class="radius">
-        <v-subheader class="headline">Add a note</v-subheader>
-        <colorpicker></colorpicker>
+          <!--  Note input  -->
+          <v-textarea
+           v-model="note"
+            auto-grow
+            label="Your note"
+             name="note"
+            rows="1"
+            id="note"
+             ></v-textarea>
 
-        <!-- <v-select chips item-avatar="teal" :items="colors" label="Standard"></v-select> -->
-
-        <!--  Note input  -->
-        <v-textarea v-model="note" auto-grow label="Your note" rows="1"></v-textarea>
-
-        <!--   Save/cancel buttons    -->
-        <v-btn small color="info" @click="snackbar1 = true; sheet=false">Save</v-btn>
-        <v-btn small flat @click=" sheet=false">Cancel</v-btn>
-      </v-list>
+          <!--   Save/cancel buttons    -->
+          <v-btn flat @click=" sheet=false">Cancel</v-btn>
+          <v-btn  type="submit" color="info"  @click="onAddNote; snackbar1 = true; sheet=false">Save</v-btn>
+        </v-list>
+      </form>
     </v-bottom-sheet>
 
     <!-- Snackbar for adding notes -->
@@ -30,37 +36,49 @@
       {{ text1 }}
       <v-btn color="#FF3D00" flat @click="snackbar1 = false">Close</v-btn>
     </v-snackbar>
-
-    
   </div>
 </template>
 
 <script>
-import colorpicker from './colorpicker.vue'
-
+import colorpicker from "./colorpicker.vue"
 
 export default {
-
   components: {
     colorpicker
   },
   data: () => ({
     sheet: false,
-    note: "",
     snackbar1: false,
     snackbar2: false,
     y: "top",
     mode: "multi-line",
     timeout: 4000,
     text1: "Note added succesfully",
- 
-
-colors: ['#00BCD4', '#CDDC39', '#E91E63', '#9C27B0']
-
+    note: ''
   }),
 
-  methods: {}
-};
+  props: ['videoId'],
+
+ computed: {
+  /*   videoIsSaved() {
+    return this.$store.getters.user.savedVideos.indexOf(this.videoId) > -1
+    }*/
+  }, 
+
+  methods: {
+
+    onAddNote() {
+   /*    if (!this.videoIsSaved) {
+         this.$store.dispatch("userSavedVideos", this.videoId)
+      } */
+      const noteData = {
+        note: this.note,
+      }
+      this.$store.dispatch("addNote", noteData)
+     
+    }
+  }
+}
 </script>
 
 
@@ -79,5 +97,7 @@ colors: ['#00BCD4', '#CDDC39', '#E91E63', '#9C27B0']
   margin: 0 auto 3vh;
 }
 
-.v-btn {margin-bottom: 5vh;}
+.v-btn {
+  margin-bottom: 5vh;
+}
 </style>

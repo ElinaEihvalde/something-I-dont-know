@@ -62,7 +62,7 @@ export default {
       videoUrl: "",
       description: "",
       video: null
-    };
+    }
   },
   computed: {
     formIsValid() {
@@ -72,12 +72,12 @@ export default {
 
   methods: {
 
-    onUploadVideo() {
+    onUploadVideo () {
       if (!this.formIsValid) {
-        return;
+        return
       }
       if (!this.video) {
-        return;
+        return
       }
       
       const videoData = {
@@ -111,7 +111,7 @@ export default {
 
       fileReader.readAsDataURL(files[0])
     
-      this.video = files[0] /// this shows the original video in the video thingy
+      this.video = files[0] 
       const videoElement = document.getElementById('video')
       videoElement.onloadeddata = () => {
       const canvas = document.createElement('canvas')

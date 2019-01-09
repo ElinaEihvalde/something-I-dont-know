@@ -66,6 +66,24 @@ export default new Vuex.Store({
 
   actions: {
 
+    //-----------ADDING NOTES---------
+/* 
+    addNote({commit, getters}, payload) {
+      const user =  getters.user
+      const fbKey = getters.user.fbKey
+      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKey).child('/notes/')
+      .push(payload)
+      .then ((data) =>{
+        commit('userSavedVideos',{ notes:payload, fbKey: data.key})
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }, */
+
+
+    //------------SAVING/UNSAVING VIDEOS---------------
+
     userSavedVideos({commit, getters}, payload) {
       const user =  getters.user
       firebase.database().ref('/users/' + user.id).child('/savedVideos/')
@@ -93,6 +111,9 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
+
+
+
 
     //--------------------VIDEO------------------------------
 
@@ -305,8 +326,6 @@ export default new Vuex.Store({
         }
         const updateUser = getters.user
           updateUser.savedVideos = savedVideos
-        console.log(savedVideos)
-      console.log(swappedPairs)
         commit('setUser', updateUser)
       })
       
@@ -324,7 +343,6 @@ export default new Vuex.Store({
         let displayName = dataPairs[Object.keys(dataPairs)[0]];
         const updateUser = getters.user
         updateUser.displayName = displayName
-        console.log(updateUser.displayName)
         commit('setUser', updateUser)
       })
     },
