@@ -38,6 +38,8 @@
         
         <p class="subheading">{{video.date | event}}</p>
         <p class="body-1">{{video.description}}</p>
+
+        <notes></notes>
       </div>
     </v-layout>
   </div>
@@ -45,10 +47,12 @@
 
 <script>
 import addNote from '../components/addNote.vue'
+import notes from '../components/notes.vue'
 
 export default {
   components:{
-    addNote
+    addNote,
+    notes
   },
  
   props: ["id"],

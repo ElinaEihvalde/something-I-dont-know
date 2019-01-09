@@ -6,6 +6,7 @@
         <v-list class="radius">
           <v-subheader class="headline">Add a note</v-subheader>
         
+        <colorpicker></colorpicker>
 
           <!--  Note input  -->
           <v-textarea
@@ -60,17 +61,17 @@ export default {
   props: ['videoId'],
 
  computed: {
-  /*   videoIsSaved() {
+     videoIsSaved() {
     return this.$store.getters.user.savedVideos.indexOf(this.videoId) > -1
-    }*/
+    }
   }, 
 
   methods: {
 
     onAddNote() {
-   /*    if (!this.videoIsSaved) {
+      if (!this.videoIsSaved) {
          this.$store.dispatch("userSavedVideos", this.videoId)
-      } */
+      } 
       const noteData = {
         note: this.note,
         videoId: this.videoId
