@@ -33,7 +33,7 @@
       <div class="description">
         <div class="inline">
         <h3 class="headline">{{video.title}}</h3>
-         <addNote></addNote>
+         <addNote v-bind:videoId="this.id"></addNote>
         </div>
         
         <p class="subheading">{{video.date | event}}</p>

@@ -5,7 +5,7 @@
       <form @submit.prevent="onAddNote">
         <v-list class="radius">
           <v-subheader class="headline">Add a note</v-subheader>
-          <colorpicker v-model="color" id="color"></colorpicker>
+        
 
           <!--  Note input  -->
           <v-textarea
@@ -73,6 +73,7 @@ export default {
       } */
       const noteData = {
         note: this.note,
+        videoId: this.videoId
       }
       this.$store.dispatch("addNote", noteData)
      

@@ -30,6 +30,7 @@ export default new Vuex.Store({
       }
       state.user.savedVideos.push(id)
       state.user.fbKeys[id] = payload.fbKeys
+      state.user.dataPairs[payload.fbKeys] = {id: payload.id, notes: ''}
     },
     userRemovedVideos (state, payload) {
       const savedVideos = state.user.savedVideos
@@ -67,19 +68,19 @@ export default new Vuex.Store({
   actions: {
 
     //-----------ADDING NOTES---------
-/* 
+
     addNote({commit, getters}, payload) {
       const user =  getters.user
-      const fbKeys = getters.user.fbKeys
-      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKeys).child('/notes/')
-      .push(payload)
-      .then ((data) =>{
-        commit('userSavedVideos',{ notes:payload, fbKeys: data.key})
+      const fbKey = Object.keys(getters.user.dataPairs).find(key => getters.user.dataPairs[key].id === payload.videoId);
+      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKey).update({notes: payload.note})
+      .then (() =>{
+        user.notes = payload.notes
+        commit('userSavedVideos',user)
       })
       .catch((error) => {
         console.log(error)
       })
-    }, */
+    },
 
 
     //------------SAVING/UNSAVING VIDEOS---------------
@@ -87,7 +88,7 @@ export default new Vuex.Store({
     userSavedVideos({commit, getters}, payload) {
       const user =  getters.user
       firebase.database().ref('/users/' + user.id).child('/savedVideos/')
-      .push(payload)
+      .push({id: payload, notes: ''})
       .then ((data) =>{
         commit('userSavedVideos',{ id:payload, fbKeys: data.key})
       })
@@ -321,12 +322,13 @@ export default new Vuex.Store({
         let savedVideos = []
         let swappedPairs = {}
         for (let key in dataPairs) {
-          savedVideos.push(dataPairs[key])
-          swappedPairs[dataPairs[key]] = key
+          savedVideos.push(dataPairs[key].id)
+          swappedPairs[dataPairs[key].id] = key
         }
         const updateUser = getters.user
           updateUser.savedVideos = savedVideos
           updateUser.fbKeys = swappedPairs
+          updateUser.dataPairs = dataPairs ? dataPairs : {}
         commit('setUser', updateUser)
       })
       
