@@ -29,7 +29,7 @@ export default new Vuex.Store({
         return
       }
       state.user.savedVideos.push(id)
-      state.user.fbKey[id] = payload.fbKey
+      state.user.fbKeys[id] = payload.fbKeys
     },
     userRemovedVideos (state, payload) {
       const savedVideos = state.user.savedVideos
@@ -70,11 +70,11 @@ export default new Vuex.Store({
 /* 
     addNote({commit, getters}, payload) {
       const user =  getters.user
-      const fbKey = getters.user.fbKey
-      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKey).child('/notes/')
+      const fbKeys = getters.user.fbKeys
+      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKeys).child('/notes/')
       .push(payload)
       .then ((data) =>{
-        commit('userSavedVideos',{ notes:payload, fbKey: data.key})
+        commit('userSavedVideos',{ notes:payload, fbKeys: data.key})
       })
       .catch((error) => {
         console.log(error)
@@ -89,7 +89,7 @@ export default new Vuex.Store({
       firebase.database().ref('/users/' + user.id).child('/savedVideos/')
       .push(payload)
       .then ((data) =>{
-        commit('userSavedVideos',{ id:payload, fbKey: data.key})
+        commit('userSavedVideos',{ id:payload, fbKeys: data.key})
       })
       .catch((error) => {
         console.log(error)
@@ -98,11 +98,11 @@ export default new Vuex.Store({
 
     userRemovedVideos({commit, getters}, payload) {
       const user =  getters.user
-      if (!user.fbKey){
+      if (!user.fbKeys){
         return
       }
-      const fbKey = user.fbKey[payload]
-      firebase.database().ref('/users/' + user.id + '/savedVideos/').child(fbKey)
+      const fbKeys = user.fbKeys[payload]
+      firebase.database().ref('/users/' + user.id + '/savedVideos/').child(fbKeys)
       .remove()
       .then (() =>{
         commit('userRemovedVideos', payload)
@@ -326,6 +326,7 @@ export default new Vuex.Store({
         }
         const updateUser = getters.user
           updateUser.savedVideos = savedVideos
+          updateUser.fbKeys = swappedPairs
         commit('setUser', updateUser)
       })
       
