@@ -40,7 +40,13 @@ props: ['videoId'],
 
   computed: {
     videoIsSaved() {
-    return this.$store.getters.user.savedVideos.indexOf(this.videoId) > -1
+    let isSaved = false;
+    this.$store.getters.user.savedVideos.forEach(element => {
+      if(element.id === this.videoId) {
+        isSaved = true;
+      } 
+    })
+    return isSaved
     }
   },
 

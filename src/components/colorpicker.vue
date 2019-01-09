@@ -8,7 +8,7 @@
         v-model="color"
         :colors="colors"
         shapes="circles"
-        inline= true
+        :inline=true
         popover-to="left"
         swatch-size = 36
         :swatch-style="style"

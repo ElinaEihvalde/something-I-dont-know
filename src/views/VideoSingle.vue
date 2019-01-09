@@ -33,13 +33,13 @@
       <div class="description">
         <div class="inline">
         <h3 class="headline">{{video.title}}</h3>
-         <addNote v-bind:videoId="this.id"></addNote>
+         <addNote v-if="videoIsSaved" v-bind:videoId="this.id"></addNote>
         </div>
         
         <p class="subheading">{{video.date | event}}</p>
         <p class="body-1">{{video.description}}</p>
 
-        <notes></notes>
+        <notes v-if="videoIsSaved" v-bind:videoId="this.id"></notes>
       </div>
     </v-layout>
   </div>
@@ -73,6 +73,15 @@ export default {
     video() {
       return this.$store.getters.loadedVideo(this.id);
     },
+    videoIsSaved() {
+      let isSaved = false
+      this.$store.getters.user.savedVideos.forEach(video => {
+        if(video.id === this.id) {
+          isSaved = true
+        }
+      });
+      return isSaved
+    }
    /*  paused() {
       return !this.playing;
     } */

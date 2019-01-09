@@ -28,9 +28,9 @@ export default new Vuex.Store({
       if (state.user.savedVideos.findIndex(video => video.id === id) >= 0) {
         return
       }
-      state.user.savedVideos.push(id)
+      state.user.savedVideos.push({id: id, notes: ['']})
       state.user.fbKeys[id] = payload.fbKeys
-      state.user.dataPairs[payload.fbKeys] = {id: payload.id, notes: ''}
+      state.user.dataPairs[payload.fbKeys] = {id: payload.id, notes: ['']}
     },
     userRemovedVideos (state, payload) {
       const savedVideos = state.user.savedVideos
@@ -72,9 +72,10 @@ export default new Vuex.Store({
     addNote({commit, getters}, payload) {
       const user =  getters.user
       const fbKey = Object.keys(getters.user.dataPairs).find(key => getters.user.dataPairs[key].id === payload.videoId);
-      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKey).update({notes: payload.note})
+      const videoIndex = user.savedVideos.findIndex((video => video.id === payload.videoId));
+      user.savedVideos[videoIndex].notes.push(payload.note)
+      firebase.database().ref('/users/' + user.id).child('/savedVideos/' + fbKey).update({notes: user.savedVideos[videoIndex].notes})
       .then (() =>{
-        user.notes = payload.notes
         commit('userSavedVideos',user)
       })
       .catch((error) => {
@@ -88,7 +89,7 @@ export default new Vuex.Store({
     userSavedVideos({commit, getters}, payload) {
       const user =  getters.user
       firebase.database().ref('/users/' + user.id).child('/savedVideos/')
-      .push({id: payload, notes: ''})
+      .push({id: payload, notes: ['']})
       .then ((data) =>{
         commit('userSavedVideos',{ id:payload, fbKeys: data.key})
       })
@@ -322,7 +323,7 @@ export default new Vuex.Store({
         let savedVideos = []
         let swappedPairs = {}
         for (let key in dataPairs) {
-          savedVideos.push(dataPairs[key].id)
+          savedVideos.push({id: dataPairs[key].id, notes: dataPairs[key].notes})
           swappedPairs[dataPairs[key].id] = key
         }
         const updateUser = getters.user

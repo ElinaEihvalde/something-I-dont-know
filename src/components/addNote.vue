@@ -5,22 +5,14 @@
       <form @submit.prevent="onAddNote">
         <v-list class="radius">
           <v-subheader class="headline">Add a note</v-subheader>
-        
-        <colorpicker></colorpicker>
+          <colorpicker></colorpicker>
 
           <!--  Note input  -->
-          <v-textarea
-           v-model="note"
-            auto-grow
-            label="Your note"
-             name="note"
-            rows="1"
-            id="note"
-             ></v-textarea>
+          <v-textarea v-model="note" auto-grow label="Your note" name="note" rows="1" id="note"></v-textarea>
 
           <!--   Save/cancel buttons    -->
           <v-btn flat @click=" sheet=false">Cancel</v-btn>
-          <v-btn  type="submit" color="info"  @click="onAddNote; snackbar1 = true; sheet=false">Save</v-btn>
+          <v-btn type="submit" color="info" @click="onAddNote; snackbar1 = true; sheet=false">Save</v-btn>
         </v-list>
       </form>
     </v-bottom-sheet>
@@ -41,7 +33,7 @@
 </template>
 
 <script>
-import colorpicker from "./colorpicker.vue"
+import colorpicker from "./colorpicker.vue";
 
 export default {
   components: {
@@ -55,32 +47,34 @@ export default {
     mode: "multi-line",
     timeout: 4000,
     text1: "Note added succesfully",
-    note: ''
+    note: "",
+    color: ""
   }),
 
-  props: ['videoId'],
+  props: ["videoId"],
 
- computed: {
-     videoIsSaved() {
-    return this.$store.getters.user.savedVideos.indexOf(this.videoId) > -1
-    }
-  }, 
+  computed: {
+    // videoIsSaved() {
+    //   let videoIsSaved = false;
+    //   this.$store.getters.user.savedVideos.forEach(video => {
+    //     if (video.id === this.videoId) {
+    //       videoIsSaved = true;
+    //     }
+    //   });
+    //   return videoIsSaved;
+    // }
+  },
 
   methods: {
-
     onAddNote() {
-      if (!this.videoIsSaved) {
-         this.$store.dispatch("userSavedVideos", this.videoId)
-      } 
       const noteData = {
         note: this.note,
         videoId: this.videoId
-      }
-      this.$store.dispatch("addNote", noteData)
-     
+      };
+        this.$store.dispatch("addNote", noteData);
     }
   }
-}
+};
 </script>
 
 

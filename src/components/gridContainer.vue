@@ -47,9 +47,11 @@ export default {
       if(type === 'saved') {
         let savedVideos = []
         this.$store.getters.loadedVideos.forEach(video => {
-          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
-            savedVideos.push(video)
-          }
+         this.$store.getters.user.savedVideos.forEach((item) => {
+            if(item.id === video.id){
+              savedVideos.push(video)
+            }
+          })
         })
         return savedVideos
       }
