@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app style="background-color:#f7f7f7;">
-      <sidenav :class="{ 'hidden': $route.path==='/videos/:id' }"></sidenav>
+      <sidenav v-show="videoIsShown()"></sidenav>
       <div id="background">
         <router-view style="background-color:#f7f7f7;"></router-view>
       </div>
@@ -20,21 +20,13 @@ export default {
   data() {
     
    
-  }/* ,
+  },
 
 methods: {
-  hide () {
-    if ($router.path === '/videos/:id') {
-     document.getElementsByTagName('sidenav').addClass('hidden')
-    }
-    else {
-      return
-    }
+  videoIsShown () {
+    return this.$route.name  !== 'Video'
   }
 } 
-   */
-
-
 }
 </script>
 
