@@ -2,34 +2,24 @@
   <div class="page-container">
     <v-layout>
       <div class="vid-container">
-        <v-btn icon flat class="btn" color="white" @click="$router.go(-1)">
+        <v-btn icon flat class="btn"  @click="$router.go(-1)">
           <v-icon large>arrow_back</v-icon>
            </v-btn>
         <video
-          class="video"
           width="100%"
           preload="metadata"
          controls
           controlslist="nodownload"
           autoplay
           :src="video.videoUrl"
-          id="videoElement"
+          id="video"
           v-play="playing"
         >
         </video>
      
       </div>
     </v-layout>
-       <div class="controls" style="display:none" >
-          <v-btn v-show="paused" @click="play">Play</v-btn>
-           <v-btn v-show="playing" @click="pause">Pause</v-btn>
-          <input type="range" id="seek-bar" value="0">
-          <button type="button" id="mute">Mute</button>
-          <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-          <v-btn type="button" id="full-screen">Full-Screen</v-btn>
-        </div>
     <v-layout>
-
       <div class="description">
         <div class="inline">
         <h3 class="headline">{{video.title}}</h3>
@@ -56,19 +46,7 @@ export default {
   },
  
   props: ["id"],
-   /* data() {
-     return{
-       playing: false
-       }
-  },
- methods: {
-   play() {
-      this.playing = true;
-    },
-    pause() {
-      this.playing = false;
-    }
- }, */
+  
   computed: {
     video() {
       return this.$store.getters.loadedVideo(this.id);
@@ -82,40 +60,15 @@ export default {
       });
       return isSaved
     }
-   /*  paused() {
-      return !this.playing;
-    } */
-  }/* ,
-
-   directives: {
-    play: {
-      bind(el, binding, vnode) {
-        el.addEventListener('playing', () => {
-          vnode.context[binding.expression] = !el.paused;
-        });
-        el.addEventListener('pause', () => {
-          vnode.context[binding.expression] = !el.paused;
-        });
-        vnode.context[binding.expression] = !el.paused;
-      },
-      update(el, binding) {
-        if (el.paused) {
-          if (binding.value) {
-            el.play();
-          }
-        } else if (!binding.value) {
-          el.pause();
-        }
-      }
-    }
-  }, */
+ 
+  }
 }
 </script>
 
 <style  scoped>
 .inline {display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 5vw;}
-.btn {position: absolute; z-index: 1000;}
-.video {
+.btn {position: absolute; z-index: 20; color:#fff;}
+#video {
   border-radius: 0 0 7px 7px;
 }
 .description {
@@ -133,10 +86,17 @@ export default {
   background-color: rgb(10, 10, 10);
   text-align: center;
   height: 35vw;
-  margin: auto;
+  margin: 2vw auto;
+   border-radius: 7px;
   }
-  #video {height: 35vw; width: 100%;}
+  #video {height: 35vw; width: 100%; }
 .page-container {width: 70%; margin: auto;}
 
+.headline { font-size: 2vw!important; padding-bottom: 1vw;}
+
+.subheading, .body-1 {font-size: 1.vw!important;}
+
+.btn{left: 20px; color:#000; }
 }
+
 </style>

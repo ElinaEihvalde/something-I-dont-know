@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-bottom-sheet v-model="sheet">
-      <v-icon disabled large slot="activator" color="#9FA8DA!important">playlist_add</v-icon>
+      <v-icon disabled large slot="activator" color="#1a237e!important">playlist_add</v-icon>
       <form @submit.prevent="onAddNote">
         <v-list class="radius">
           <v-subheader class="headline">Add a note</v-subheader>
-          <colorpicker></colorpicker>
+          <!-- <colorpicker></colorpicker> -->
 
           <!--  Note input  -->
           <v-textarea v-model="note" auto-grow label="Your note" name="note" rows="1" id="note"></v-textarea>
@@ -33,48 +33,36 @@
 </template>
 
 <script>
-import colorpicker from "./colorpicker.vue";
+/* import colorpicker from "./colorpicker.vue"; */
 
 export default {
   components: {
-    colorpicker
+    /* colorpicker */
   },
   data: () => ({
     sheet: false,
     snackbar1: false,
-    snackbar2: false,
     y: "top",
     mode: "multi-line",
     timeout: 4000,
     text1: "Note added succesfully",
     note: "",
-    color: ""
+   
   }),
 
   props: ["videoId"],
 
-  computed: {
-    // videoIsSaved() {
-    //   let videoIsSaved = false;
-    //   this.$store.getters.user.savedVideos.forEach(video => {
-    //     if (video.id === this.videoId) {
-    //       videoIsSaved = true;
-    //     }
-    //   });
-    //   return videoIsSaved;
-    // }
-  },
 
   methods: {
     onAddNote() {
       const noteData = {
         note: this.note,
         videoId: this.videoId
-      };
+      }
         this.$store.dispatch("addNote", noteData);
     }
   }
-};
+}
 </script>
 
 

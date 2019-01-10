@@ -48,7 +48,7 @@ computed: {
 <style scoped>
 .top-icon {
   position: absolute;
-  z-index: 100000;
+  z-index: 2;
   right: 0;
   top: 0;
 }
@@ -66,7 +66,7 @@ computed: {
   color: #fff;
   position: absolute;
   bottom: 0;
-  left: 50px;
+   margin-left: 2.5em;
   z-index: 2;
 }
 
@@ -77,18 +77,15 @@ computed: {
   padding: unset;
   width: 100%;
 }
-.inline i {
-  bottom: 0;
-}
 
 
 
 .radius {
   border-radius: 7px;
-  min-width: 200px;
+  min-width: 220px;
   height: 250px;
   background-color: #32889e;
-  margin: 2vw 3vw 2vw 0;
+  margin: 2vw 4vw 2vw 0;
   cursor: pointer;
 }
 .horizontal {
@@ -101,30 +98,39 @@ computed: {
   display: none;
 }
 
-@media (min-width: 1281px) {
-  
-      .horizontal {
-      margin-top: 2vw;
-      min-width: 100%; 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      height: 500px;
-      grid-row-gap: 20px;
-      grid-column-gap: 20px;
-      }
-      .radius {margin: 0; height: 240px;}
-      .radius:nth-of-type(1){
-      height: 500px;
-      grid-column: 1 / 3;
-      grid-row: 1/3;
-      }
-      .radius:nth-of-type(2) {
-        grid-column: 3 / 4;
-        grid-row: 1 / 2;  
-        }
-      .radius:nth-of-type(3) {
-        grid-column: 3/4;
-        grid-row: 2/3;
-        }
+@media (min-width: 1025px) {
+  .horizontal {
+    margin-top: 1em;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 500px;
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+  }
+  .radius {
+    margin: 0;
+    height: 240px;
+    width: 100%;
+  }
+  .radius:nth-of-type(1) {
+    height: 500px;
+    grid-column: 1 / 3;
+    grid-row: 1/3;
+  }
+  .radius:nth-of-type(2) {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+  }
+  .radius:nth-of-type(3) {
+    grid-column: 3/4;
+    grid-row: 2/3;
+  }
+  .radius:nth-of-type(4) {
+    display: none;
+  }
+  .radius:nth-of-type(5) {
+    display: none;
+  }
 }
 </style>

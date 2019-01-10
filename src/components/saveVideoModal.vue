@@ -1,6 +1,6 @@
 <template>
   <v-bottom-sheet persistent v-model="saveDialog">
-    <v-btn icon flat color="white" slot="activator">
+    <v-btn icon flat color="white"  slot="activator">
       <v-icon v-if="!videoIsSaved">bookmark_border</v-icon>
       <v-icon v-else>bookmark</v-icon>
     </v-btn>
@@ -24,8 +24,35 @@
           </v-flex>
         </v-layout>
       </v-container>
+       <!-- Snackbar for adding notes -->
+    <v-snackbar
+      class="snack"
+      v-model="snackbar1"
+      :timeout="timeout"
+      :top="y"
+      :multi-line="mode"
+      color="#fff"
+    >
+      {{ text1 }}
+      <v-btn color="#FF3D00" flat @click="snackbar1 = false">Close</v-btn>
+    </v-snackbar>
+
+    <v-snackbar
+      class="snack"
+      v-model="snackbar2"
+      :timeout="timeout"
+      :top="y"
+      :multi-line="mode"
+      color="#fff"
+    >
+      {{ text2 }}
+      <v-btn color="#FF3D00" flat @click="snackbar1 = false">Close</v-btn>
+    </v-snackbar>
     </v-card>
   </v-bottom-sheet>
+
+
+  
 </template>
 
 
@@ -34,7 +61,14 @@ export default {
 props: ['videoId'],
 
   data: () => ({
-    saveDialog: false
+    saveDialog: false,
+    snackbar1: false,
+     snackbar2: false,
+    y: "top",
+    mode: "multi-line",
+    timeout: 4000,
+    text1: "Video saved succesfully",
+    text2: "Video removed from saved"
   }),
   
 
@@ -54,10 +88,14 @@ props: ['videoId'],
     onSave() {
       if (this.videoIsSaved) {
         this.$store.dispatch("userRemovedVideos", this.videoId)
+        
         this.saveDialog = false
+         
       } else {
         this.$store.dispatch("userSavedVideos", this.videoId)
+
         this.saveDialog = false
+         
       }
       
     }

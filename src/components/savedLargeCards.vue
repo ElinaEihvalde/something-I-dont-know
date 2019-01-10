@@ -25,11 +25,13 @@ export default {
 
   computed: {
     videos() {
-     let savedVideos = []
+    let savedVideos = []
         this.$store.getters.loadedVideos.forEach(video => {
-          if(this.$store.getters.user.savedVideos.indexOf(video.id) > -1) {
-            savedVideos.push(video)
-          }
+         this.$store.getters.user.savedVideos.forEach((item) => {
+            if(item.id === video.id){
+              savedVideos.push(video)
+            }
+          })
         })
         return savedVideos
     }
@@ -46,14 +48,13 @@ export default {
 <style  scoped>
 .title {
   color: #fff;
-  position: absolute;
-  bottom: 2vw;
-  z-index: 2;
+  bottom: 2em;
+  z-index: 1;
 }
 
 .top-icon {
   position: absolute;
-  z-index: 100000;
+  z-index: 1;
   right: 0;
   top: 0;
 }
@@ -71,7 +72,7 @@ export default {
   color: #fff;
   position: absolute;
   bottom: 0;
-  left: 50px;
+  margin-left: 2.5em;
   z-index: 2;
 }
 
@@ -90,7 +91,7 @@ export default {
 width: 100%;
   height: 400px;
   background-color: #32889e;
-  margin: 2vw 2vw 2vw 0;
+   margin: 1em 0 2em 0;
   cursor: pointer;
 }
 .vertical {
@@ -106,11 +107,9 @@ width: 100%;
 i {
   position: absolute;
   z-index: 1;
-  right: 2vh;
-  top: 2vh;
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 1025px) {
 
 .vertical {
   height: auto;
@@ -118,7 +117,7 @@ i {
   display: grid;
   overflow-x: auto;
   overflow-y: hidden;
-  grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(4, 1fr); 
   grid-column-gap: 20px;
 
 }
@@ -126,9 +125,9 @@ i {
   width: 100%;
   height: 400px;
   background-color: #32889e;
-  margin: 2vw 2vw 0 0;
+
   cursor: pointer;
-  display: inline;
+ 
 }
 
 }

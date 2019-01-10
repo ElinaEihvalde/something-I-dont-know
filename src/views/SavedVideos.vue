@@ -1,21 +1,21 @@
 <template>
-  <v-container>
-    <v-flex>
+<div>
+  <div class="page-wrap">
       <v-tabs fixed-tabs v-model="active_tab">
         <v-tab v-for="tab in tabs" :key="tab.id"  >{{ tab.title }}</v-tab>
         <v-tab-item>
-          <v-layout row>
+          <v-layout row class="tab-container">
             <largeCards></largeCards>
           </v-layout>
         </v-tab-item>
         <v-tab-item >
-          <v-layout row>
+          <v-layout row  class="tab-container">
             <savedLargeCards></savedLargeCards>
           </v-layout>
         </v-tab-item>
       </v-tabs>
-    </v-flex>
-  </v-container>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -74,5 +74,15 @@ export default {
 }
 .container {
   padding-top: 0;
+}
+.tab-container{    width: 100%;
+    margin: auto;
+    padding: 0 24px;}
+.page-wrap {margin: 8vh auto 0 auto;}
+
+@media (min-width: 1025px) {
+.page-wrap {width: 90vw;}
+
+
 }
 </style>

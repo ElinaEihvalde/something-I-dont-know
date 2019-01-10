@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="banner-wrap">
-      <img class="home-banner" src="https://i.imgur.com/g1TfEfW.jpg">
+      <img class="home-banner" src="../assets/banner.jpg" width="100%">
     </div>
 
     <v-content>
       <div class="wrapper">
-        <h4 >Welcome {{getUserName}}!</h4>
+        <h4 class="welcome" >Welcome {{getUserName}}!</h4>
          
         <div class="video-grid">
-          <gridContainer></gridContainer>
+          <gridContainer class="gridContainer"></gridContainer>
         </div>
         <div class="schedule-grid">
-          <schedule-cont></schedule-cont>
+           <schedule-cont-home></schedule-cont-home>
+          <events class="events"></events>
         </div>
       </div>
     </v-content> </div>
@@ -21,14 +22,15 @@
 
 <script>
 import gridContainer from '../components/gridContainer.vue'
-import scheduleCont from '../components/scheduleCont.vue'
-
+import scheduleContHome from '../components/scheduleContHome.vue'
+import events from '../components/events.vue'
 
 export default {
   name: "App",
   components: {
     gridContainer,
-    scheduleCont
+     scheduleContHome,
+    events
   },
 
   computed: 
@@ -46,11 +48,10 @@ export default {
 .home-banner {
   width: 100%;
   z-index: 0;
-  height: 45vh;
   margin: auto;
 }
 .banner-wrap {
-  height: 44vh;
+  height: 65vw;
   margin: auto;
 }
 .wrapper {
@@ -58,14 +59,19 @@ export default {
   border-radius: 7px;
   padding: 2em 0;
 }
+.events {display: none;}
 
-.wrapper h4 {
-  font-size: 8vw;
-      font-weight: 400;
-      margin: 3vw 24px;
-}
 
-@media (min-width: 1281px) {
+.welcome {
+    grid-column: 1 / 10;
+    grid-row: 1;
+    margin: 0.5em 0 1em 24px;
+     font-size: 9vw;
+  
+      font-weight: 500;
+  }
+
+@media (min-width: 1025px) {
   .home-banner {
   position: relative;
   width: 90vw;
@@ -73,9 +79,13 @@ export default {
 }
 .banner-wrap {
   text-align: center;
-  width: 90vw;
+  width: 100%;
   margin: auto;
-  height: 10vw;
+  height: 15vw;
+}
+
+.welcome {
+  font-size: 3vw;
 }
   .container {
     margin: 0;
@@ -85,23 +95,31 @@ export default {
     max-width: 90vw;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-gap: 50px;
+   grid-gap: 4em;
   }
 
   .video-grid {
     grid-column: 1 / 6;
-    grid-row: 1;
+    grid-row: 2;
     border-radius: 7px;
   }
 
   .schedule-grid {
     grid-column: 6 / 10;
-    grid-row: 1;
+    grid-row: 2;
   }
 
   .horizontal {
-    overflow-x: hidden;
+    overflow-x:auto;
   }
-  
+  .events {margin-top: 4em; display: block;}
+
+.grid-container {width: 100%;}
+.welcome {
+    grid-column: 1 / 10;
+    grid-row: 1;
+    border-radius: 7px;
+    margin: 1em 0 0 24px;
+  }
 }
 </style>

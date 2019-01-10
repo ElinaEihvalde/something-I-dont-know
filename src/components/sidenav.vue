@@ -4,7 +4,9 @@
     <v-navigation-drawer id="drawer" v-model="drawer" fixed temporary v-if="userIsAuthenticated" class="drawer-height">
       <!-- Image and container -->
       <v-list class="top">
-        <img src="https://i.imgur.com/0bWwcEd.jpg">
+        <div class="logoBan">
+       <img id="orangeLogo" src="../assets/logowhite.svg" >
+        </div>
       </v-list>
      
       <!-- Middle part of navigation -->
@@ -25,16 +27,7 @@
       </v-list>
       <!-- Bottom part of navigation -->
       <v-list class="bottom">
-          <v-list-tile to="/settings">
-          <v-list-tile-action 
-          class="icon-padding">
-            <v-icon>settings</v-icon>
-          </v-list-tile-action>
-
-          <v-list-tile-content>
-            <v-list-tile-title>Settings</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+         
         <!-- Log out button -->
         <v-list-tile @click="onLogout" to="/login">
           <v-list-tile-action 
@@ -126,7 +119,9 @@ export default {
 
 <style scoped>
 .drawer-height {height: 100vh !important;}
+.logoBan { background-color: #1a237e; width: 100%; height: 100%;}
 
+#orangeLogo {width: 60%; margin: 12% 10%;}
 .top {
   padding: 0;
   height: 23%;

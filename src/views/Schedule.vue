@@ -1,12 +1,14 @@
 <template>
 <v-content>
+   <div class="wrapper">
 <calendar class="calendar"></calendar>
 <div class="week-container" v-for="container in containers" :key="container.id">
 <h3 class="headline">{{container.hed}}</h3>
-<p class="subheading" >{{container.sub}}</p>
+<p class="subheading">{{container.sub}}</p>
  <weekCard></weekCard>
 </div>
 <events class="events"></events>
+   </div>
 </v-content>
 </template>
 
@@ -17,7 +19,6 @@ import weekCard from '../components/weekCard.vue'
 import events from '../components/events.vue'
 
  export default {
-    name:'App',
     components: {
       calendar,
       weekCard,
@@ -60,13 +61,14 @@ import events from '../components/events.vue'
   margin: unset;
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 1025px) {
   .wrapper {
     width: 90vw;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 50px;
+    padding: 0 24px;
   }
   .calendar {
     grid-column: 1 / 2;
@@ -84,7 +86,7 @@ import events from '../components/events.vue'
     padding: 0;
   }
   .container {margin: unset;}
-  .radius {min-width: 17vw;}
+
 
   
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <div class="page-wrap">
       <v-tabs fixed-tabs >
         <v-tab v-for="tab in tabs" :key="tab.id" >{{ tab.title }}</v-tab>
         <v-tab-item >
@@ -14,7 +14,7 @@
           </v-layout>
         </v-tab-item>
       </v-tabs>
-  
+    </div>
   </div>
 </template>
 
@@ -72,6 +72,14 @@ export default {
   font-size: 12px;
 }
 
-.tab-container{width: 90%; margin:auto;}
-</style>
+.tab-container{    width: 100%;
+    margin: auto;
+    padding: 0 24px;}
+.page-wrap {margin: 8vh auto 0 auto;}
+
+@media (min-width: 1025px) {
+.page-wrap {width: 90vw;}
+
+
+}</style>
 

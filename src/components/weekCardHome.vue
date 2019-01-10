@@ -6,10 +6,10 @@
           <h6 class="title">{{day.date | today}}</h6>
           <attending></attending>
         </div>
-
-        <p class="body-2">{{day.date | date }}</p>
-        <p class="body-2">{{day.time}}</p>
-
+        <div class="body-1">
+          <p class="body-2">{{day.date | date }}</p>
+          <p class="body-2">{{day.time}}</p>
+        </div>
         <h5 class="headline font-weight-bold">{{day.event}}</h5>
       </v-container>
     </v-card>
@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      
       days: [
         {
           id: 1,
@@ -37,7 +36,6 @@ export default {
         {
           id: 2,
           date: new Date()
-         
         },
         {
           id: 3,
@@ -64,11 +62,9 @@ export default {
   },
 
   methods: {
-    getWeek() {
-      
-    }
+    getWeek() {}
   }
-}
+};
 </script>
 
 <style scoped>
@@ -79,8 +75,6 @@ export default {
   background-image: linear-gradient(-135deg, #1a237e, #4657c4);
   color: #fff;
 }
-
-.container {padding-top: 1.5em;}
 
 .horizontal {
   min-width: 100%;
@@ -96,7 +90,7 @@ export default {
   margin-bottom: unset;
 }
 .headline {
-  padding-top: 4vw;
+  padding-top: 0.5em;
   letter-spacing: 1.5em;
 }
 
@@ -107,17 +101,52 @@ export default {
   padding: unset;
   width: 100%;
 }
+.container {
+  padding-top: 1.5em;
+}
 
 @media (min-width: 1025px) {
-.horizontal {overflow-x: hidden;}
-.radius {
+  .horizontal {
+    max-width: 100%;
+  }
+  .radius {
     border-radius: 7px;
-    min-width: 10%;
-    margin: 1em 1% 1em 0;
-}
-.headline {font-size: 1.5em !important;}
-.title {font-size: 1.3em !important;}
+    width: 50%;
+    margin: 1em 1em 1em 0;
+    min-width: unset;
+  }
 
-}
+  .headline {
+    padding-top: 1em;
+    letter-spacing: 1.5em;
+  }
 
+  .inline {
+    display: grid !important;
+    grid-template-columns: 16fr 1fr;
+    margin: unset;
+    padding: unset;
+    width: 100%;
+  }
+  .radius:nth-of-type(3) {
+    display: none;
+  }
+  .radius:nth-of-type(4) {
+    display: none;
+  }
+  .radius:nth-of-type(5) {
+    display: none;
+  }
+  .radius:nth-of-type(6) {
+    display: none;
+  }
+  .radius:nth-of-type(7) {
+    display: none;
+  }
+  /* .headline {font-size: 1.7em !important;}
+.title {font-size: 2em !important;}
+.body-2 {font-size: 1.5em !important; }
+.body-1 {margin-top: 1em;} */
+  /* .body-1 :nth-of-type(2) {margin-left: 1em;} */
+}
 </style>

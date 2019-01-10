@@ -46,7 +46,7 @@ export default {
     y: "top",
     mode: "multi-line",
     timeout: 4000,
-    text1: "Hello, I'm a snackbar",
+    text1: "Don't forget to train at home!",
     text2: "See You in class!",
    
   }),
