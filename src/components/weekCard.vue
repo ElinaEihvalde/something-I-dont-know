@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      
       days: [
         {
           id: 1,
@@ -33,31 +32,29 @@ export default {
           time: "16:55 - 17:45",
           event: "Hip-Hop"
         },
-
         {
           id: 2,
-          date: new Date()
-         
+          date: new Date().setDate(new Date().getDate() + 1)
         },
         {
           id: 3,
-          day: "Wednesdsy"
+          date: new Date().setDate(new Date().getDate() + 2)
         },
         {
           id: 4,
-          day: "Thursday"
+          date: new Date().setDate(new Date().getDate() + 3)
         },
         {
           id: 5,
-          day: "Friday"
+          date: new Date().setDate(new Date().getDate() + 4)
         },
         {
           id: 6,
-          day: "Saturday"
+          date: new Date().setDate(new Date().getDate() + 5)
         },
         {
           id: 7,
-          day: "Sunday"
+          date: new Date().setDate(new Date().getDate() + 6)
         }
       ]
     };
