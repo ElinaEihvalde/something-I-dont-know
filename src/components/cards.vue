@@ -87,17 +87,25 @@ computed: {
   background-color: #32889e;
   margin: 2vw 4vw 2vw 0;
   cursor: pointer;
+  flex: 0 0 auto;
 }
+
+
 .horizontal {
-  min-width: 100%;
+ width: 100%;
+ padding-left:24px;
+ margin-right:24px;
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+
+
 .horizontal::-webkit-scrollbar {
   display: none;
 }
-
 @media (min-width: 1025px) {
   .horizontal {
     margin-top: 1em;

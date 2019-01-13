@@ -9,7 +9,7 @@
         <form @submit.prevent="onUploadVideo">
            <v-layout row>
             <video id='video'  height="300" controls :src="videoUrl"></video>
-             <img :src='thumbnail'>
+           
           </v-layout>
           <br>
           <v-layout row>

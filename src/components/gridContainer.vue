@@ -66,8 +66,10 @@ export default {
 <style scoped>
 .container {
   height: auto;
-  padding: 0 0 0 24px;
+ padding-left: unset;
+  padding-right: unset;
  margin-bottom: 4em;
+
 }
 
 .right {
@@ -82,6 +84,8 @@ export default {
   color: #4657c4;
   margin: unset;
 }
+
+.subheading, .headline {  padding: 0 0 0 24px;}
 @media (min-width: 1025px) {
 .inline {display: inline;}
 }
